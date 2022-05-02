@@ -8,10 +8,11 @@ exports.postingUser=async(req,res)=>{
 const user=new usersSchema({
     fname:req.body.fname,
     lname:req.body.lname,
+    type: req.body.type,
     password:hashPassword
 })
 await user.save();
-if (user) {
+if (!user) {
     return res.status(400).send("Account not created")
 }
 return res.status(201).send("Account created")
@@ -84,7 +85,8 @@ exports.loginUser=async(req,res)=>{
 let token =jwt.sign({
     id:user._id,
     fname:user.fname,
-    lname:user.lname
+    lname:user.lname,
+    type: user.type
 },
 "dsdsdsddsd"
 )
