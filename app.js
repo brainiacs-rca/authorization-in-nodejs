@@ -18,6 +18,9 @@ const dbConnection=()=>{
     })
 }
 dbConnection();
+
+const swaggerUi = require('swagger-ui-express'),swaggerDocument = require('./swagger.json');
+
 //CRUD
 //C: create httpMethod: post, 
 //R: read httpMethod: get,
@@ -28,5 +31,9 @@ dbConnection();
 app.get("/",(req,res)=>{
   return  res.send("welcome to brainiacs")
 })
-
+app.use(
+    '/api-docs',
+    swaggerUi.serve, 
+    swaggerUi.setup(swaggerDocument)
+  );
 app.use("/user",userRoutes)
