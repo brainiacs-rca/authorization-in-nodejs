@@ -43,7 +43,9 @@ exports.getUserById=async(req, res)=>{
 }
 //updating
 exports.updateUser=async (req, res)=>{
-    console.log(req.params.id);
+    if(req.user.id!=req.params.id){
+        return res.status(401).send("You can't update other user")
+    }
     const user=await usersSchema.findByIdAndUpdate(req.params.id,{
         fname:req.body.fname
     })

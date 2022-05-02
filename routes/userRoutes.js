@@ -5,7 +5,7 @@ const router = express.Router()
 router.post("/",postingUser)
 .get("/",protect, getAllUsers);
 router.get("/:id",getUserById)
-.put("/:id",updateUser)
+.put("/:id",protect,updateUser)
 .delete("/:id",[protect,filterUser(['ADMIN'])],deleteUser);
 router.post("/login",loginUser)
 module.exports.userRoutes=router
